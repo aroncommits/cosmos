@@ -1,0 +1,16 @@
+/* Theme for Firefox */
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+a, a:active, a:focus {
+    outline: none !important;
+}
+
+/* remove autohiding location bar, as I find autohiding things infuriating */
+#fullscr-toggler { display:none!important; }
+
+/* Tab bar background */
+#TabsToolbar {
+  /* Hide the Tabbar */
+  visibility: collapse !important;
+
+}
