@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
   syncting = { };
@@ -125,11 +125,10 @@ in
   # Define a user account. Don't forget to set a password with ‘passwd’.
   programs.zsh.enable = true;
   users.users = {
-    # TODO make this from local configuration
-    aron = {
+    "${config.local.user}" = {
       shell = pkgs.zsh;
       isNormalUser = true;
-      description = "Aron Nash";
+      description = config.local.userName;
       extraGroups = [
         "networkmanager"
         "wheel"
@@ -204,7 +203,7 @@ in
 
   # TODO make me conditional and customize user
   users.groups.uinput = {
-    members = [ "aron" ];
+    members = [ "@wheel" ];
   };
 
   services.udev.extraRules = ''

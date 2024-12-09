@@ -48,7 +48,7 @@
 
     extra-trusted-users = [
       "root"
-      "aron"
+      "@wheel"
     ];
   };
 
@@ -79,6 +79,8 @@
         system: import nixpkgs-unstable { inherit system; }
       );
       x86_64-linux = pkgsForUnstable.x86_64-linux;
+
+      params = import ./params.local.nix;
     in
     {
       # Your custom packages
@@ -104,13 +106,13 @@
           specialArgs = {
             inherit inputs outputs;
           };
-          modules = [ ./hosts/system76 ];
+          modules = [ ./params.local.nix ./hosts/system76 ];
         };
         framework = libUnstable.nixosSystem {
           specialArgs = {
             inherit inputs outputs;
           };
-          modules = [ ./hosts/framework ];
+          modules = [ ./params.local.nix ./hosts/framework ];
         };
       };
 
@@ -121,14 +123,15 @@
           inherit (./info.nix) systemUsersMap;
         in
           {
-            "aron" = home-manager.lib.homeManagerConfiguration {
+            homes = home-manager.lib.homeManagerConfiguration {
               pkgs = pkgsForUnstable.x86_64-linux;
               extraSpecialArgs = {
                 inherit inputs outputs;
               };
               modules = [
                 stylix.homeManagerModules.stylix
-                ./home/aron.nix
+                ./home/user.nix
+                ./params.local.nix
               ];
             };
           };

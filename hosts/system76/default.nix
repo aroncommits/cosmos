@@ -69,6 +69,7 @@
     sda-luks /dev/disk/by-uuid/b071583d-7257-4322-80ca-8e18c991b724 /root/sda.keyfile
   '';
 
+  # TODO fix me
   fileSystems."/home/aron/projects" = {
     device = "/dev/disk/by-uuid/9ec39ce1-0fef-41c8-a7a3-88c4674684c4";
     fsType = "ext4";

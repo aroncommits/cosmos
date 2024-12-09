@@ -8,8 +8,8 @@ system76-system:
 framework-system:
 	sudo nixos-rebuild switch --flake .#framework
 
-aron:
-	home-manager switch --flake .#aron
+homes:
+	home-manager switch --flake .#homes
 
 clean-system:
 	sudo nix-env --delete-generations old

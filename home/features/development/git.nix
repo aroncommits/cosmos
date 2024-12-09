@@ -1,18 +1,18 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
   home.packages = with pkgs; [ git-extras ];
 
   programs.git = {
     enable = true;
 
     # TODO read from a config file
-    userName = "Aron Nash";
-    userEmail = "commit@arona.sh";
+    userName = config.local.userName;
+    userEmail = config.local.gitEmail;
 
     signing = {
       signByDefault = true;
       # defining it ismportant for tools like pass.
       # TODO read from a config file
-      key = "hi@arona.sh";
+      key = config.local.email;
     };
 
     extraConfig = {
